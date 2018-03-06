@@ -8,26 +8,37 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
             <li>
-              <a role="button">Name ASC</a>
+              <a v-on:click="handleSort('name', 'asc')" role="button">Name ASC</a>
             </li>
             <li>
-              <a role="button">Name DESC</a>
+              <a v-on:click="handleSort('name', 'desc')" role="button">Name DESC</a>
             </li>
             <li role="separator" class="divider"></li>
             <li>
-              <a role="button">Level ASC</a>
+              <a v-on:click="handleSort('level', 'asc')" role="button">Level ASC</a>
             </li>
             <li>
-              <a role="button">Level DESC</a>
+              <a v-on:click="handleSort('level', 'desc')" role="button">Level DESC</a>
             </li>
           </ul>
-          <span class="label label-success label-medium">NAME - DESC</span>
+          <span class="label label-success label-medium">{{ strSort }}</span>
         </div>
       </div>
 </template>
 
 <script>
 export default {
-  name: 'sort'
+  name: 'sort',
+  computed: {
+    strSort() {
+      return this.$store.state.orderBy + " - " + this.$store.state.orderDir;
+    }
+  },
+  methods: {
+    handleSort(orderBy, orderDir) {
+      let order = {orderBy, orderDir};
+      return this.$store.dispatch('CHANGE_SORT', order);
+    }
+  }
 }
 </script>

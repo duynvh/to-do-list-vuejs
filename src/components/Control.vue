@@ -9,9 +9,7 @@
       <!-- SORT : END -->
 
       <!-- ADD : START -->
-      <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-        <button type="button" class="btn btn-info btn-block">Add Task</button>
-      </div>
+      <Toggle></Toggle>
       <!-- ADD : END -->
 
     </div>
@@ -20,11 +18,17 @@
 <script>
 import Search from './Search';
 import Sort from './Sort';
+import Toggle from './Toggle';
 export default {
     components: {
       Search,
-      Sort
+      Sort,
+      Toggle
     },
-    name: 'control'
+    name: 'control',
+    data() {
+      return {
+      }
+    }
 }
 </script>

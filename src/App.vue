@@ -11,7 +11,7 @@
     <!-- FORM : END -->
 
     <!-- LIST : START -->
-    <List v-bind:task="task"></List>
+    <List></List>
     <!-- LIST : END -->
     </div>
     <!-- TITLE : START -->
@@ -24,7 +24,6 @@ import TitleApp from './components/Title';
 import Control from './components/Control';
 import Form from './components/Form';
 import List from './components/List';
-import task from './mocks/task.js';
 export default {
   components: {
       TitleApp,
@@ -32,11 +31,6 @@ export default {
       Form,
       List
   },
-  name: 'App',
-  data: function () {
-    return {
-      task: task
-    }
-  }
+  name: 'App'
 }
 </script>

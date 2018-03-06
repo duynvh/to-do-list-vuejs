@@ -11,9 +11,7 @@
           </tr>
         </thead>
         <tbody>
-            <template v-for="(item, index) in task">
-                <Item v-bind:number="index" v-bind:taskName="item.name" v-bind:level="item.level"></Item>
-            </template>
+            <Item v-for="(item, index) in getItem" v-bind:item="item" v-bind:index="index"></Item>
         </tbody>
 
       </table>
@@ -22,11 +20,33 @@
 
 <script>
 import Item from './Item';
+import { filter, includes, orderBy as funcOrderBy } from 'lodash';
 export default {
     components : {
         Item
     },
     name: 'List',
-    props: ['task']
+    data() {
+        return {
+            task: this.$store.state.task
+        }
+    },
+    computed: {
+        getItem() {
+            let task = this.$store.state.task;
+            let strSearch = this.$store.state.search;
+            let itemsOrigin = (task !== null) ? [...task] : [];
+            // Search
+            let items = filter(itemsOrigin, (item) => {
+                return includes(item.name, strSearch);
+            });
+
+            // Sort
+            let orderBy = this.$store.state.orderBy;
+            let orderDir = this.$store.state.orderDir;
+            items = funcOrderBy(items, [orderBy], [orderDir]);
+            return items;
+        }
+    }
 }
 </script>
